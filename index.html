@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>GPA_Calculater</title>
+</head>
+
+<body>
+    <section>
+        <div class="inner text-center d-flex align-content-center justify-content-center mt-5">
+            <form id="Form">
+                <h1 class="m-4"> GPA Calculate </h1>
+                <div id="alert_box"></div>
+                <div class="mb-3">
+                    <label for="book1" class="form-label">Enter Book 1 marks ( 0 - 100) </label>
+                    <input max="100" min="0" value="0" type="number" class="form-control" id="book1">
+                </div>
+                <div class="mb-3">
+                    <label for="book2" class="form-label">Enter Book 2 marks ( 0 - 100) </label>
+                    <input max="100" min="0" value="0" type="number" class="form-control" id="book2">
+                </div>
+                <div class="mb-3">
+                    <label for="book3" class="form-label">Enter Book 3 marks ( 0 - 100) </label>
+                    <input max="100" min="0" value="0" type="number" class="form-control" id="book3">
+                </div>
+                <div class="mb-3">
+                    <label for="book4" class="form-label">Enter Book 4 marks ( 0 - 100) </label>
+                    <input max="100" min="0" value="0" type="number" class="form-control" id="book4">
+                </div>
+                <button type="submit" class="btn btn-primary">Display GPA</button>
+            </form>
+        </div>
+    </section>
+    <script>
+        let form = document.getElementById("Form");
+        let alertBox = document.getElementById("alert_box");
+
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            let gpa = 0;
+            let input = form.getElementsByClassName("form-control");
+            for (let i = 0; i < input.length; i++) {
+                gpa += book_gpa(input[i].valueAsNumber);
+            }
+            gpa /= input.length;
+            display(gpa);
+        });
+
+        function display(gpa) {
+            alertBox.innerHTML = ``;
+            if (gpa <= 1.8)
+                alertBox.innerHTML = `<div class="alert alert-danger" role="alert">Your GPA is ` + gpa + ` </div>`;
+            else if (gpa <= 2.2)
+                alertBox.innerHTML = `<div class="alert alert-warning" role="alert">Your GPA is ` + gpa + ` </div>`;
+            else if (gpa <= 3.0)
+                alertBox.innerHTML = `<div class="alert alert-info" role="alert">Your GPA is ` + gpa + ` </div>`;
+            else
+                alertBox.innerHTML = `<div class="alert alert-success" role="alert">Your GPA is ` + gpa + ` </div>`;
+        }
+
+        function book_gpa(p) {
+            if (p >= 86)
+                return 4.0;
+            else if (p >= 82)
+                return 3.67;
+            else if (p >= 78)
+                return 3.33;
+            else if (p >= 74)
+                return 3.0;
+            else if (p >= 70)
+                return 2.67;
+            else if (p >= 66)
+                return 2.33;
+            else if (p >= 62)
+                return 2.00;
+            else if (p >= 58)
+                return 1.67;
+            else if (p >= 54)
+                return 1.33;
+            else if (p >= 50)
+                return 1.0;
+            else
+                return 0.0;
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+
+</html>
